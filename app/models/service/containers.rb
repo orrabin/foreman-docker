@@ -73,23 +73,20 @@ module Service
     def load_environment_variables(state, r)
       state.environment_variables.each do |environment_variable|
         r.environment_variables.build :name     => environment_variable.name,
-                                      :value    => environment_variable.value,
-                                      :priority => environment_variable.priority
+                                      :value    => environment_variable.value
       end
     end
 
     def load_exposed_ports(state, r)
       state.exposed_ports.each do |e|
         r.exposed_ports.build :name => e.name,
-                              :value => e.value,
-                              :priority => e.priority
+                              :value => e.value
       end
     end
 
     def load_dns(state, r)
       state.dns.each do |e|
-        r.dns.build :name => e.name,
-                    :priority => e.priority
+        r.dns.build :name => e.name
       end
     end
 

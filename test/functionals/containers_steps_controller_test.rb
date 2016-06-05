@@ -52,8 +52,7 @@ module Containers
       # Load ExposedPort variables into container
       state.environment.exposed_ports.each do |e|
         @container.exposed_ports.build :name => e.name,
-                                       :value => e.value,
-                                       :priority => e.priority
+                                       :value => e.value
       end
       # Check if parametrized value of container matches Docker API's expectations
       assert @container.parametrize.key? "ExposedPorts"
@@ -75,8 +74,7 @@ module Containers
 
       # Load Dns variables into container
       state.environment.dns.each do |e|
-        @container.dns.build :name => e.name,
-                             :priority => e.priority
+        @container.dns.build :name => e.name
       end
       # Check if parametrized value of container matches Docker API's expectations
       assert @container.parametrize.key? "HostConfig"

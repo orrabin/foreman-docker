@@ -1,5 +1,4 @@
-class ExposedPort < Parameter
-  attr_accessible :priority
+class ExposedPort < DockerParameter
   # The Parameter class from which ExposedPort class inherits,validates for the
   # presence of an  associated domain, operating system, host or host group. We
   # will have to reset those validations for the  ExposedPort class as  they do
@@ -7,7 +6,7 @@ class ExposedPort < Parameter
   ExposedPort.reset_callbacks(:validate)
 
   belongs_to :container, :foreign_key => :reference_id, :inverse_of => :exposed_ports
-  audited :except => [:priority], :associated_with => :container, :allow_mass_assignment => true
+  audited :associated_with => :container, :allow_mass_assignment => true
   validates :name,  :uniqueness => { :scope => :reference_id }
   validates :name,  :numericality => { :only_integer => true,
                                        :greater_than => 0,

@@ -1,8 +1,7 @@
 require 'resolv'
 
 module ForemanDocker
-  class Dns < Parameter
-    attr_accessible :priority
+  class Dns < DockerParameter
 
     # The Parameter class from which this Dns class inherits,validates for the
     # presence of an associated domain,  operating system, host or host group.
@@ -14,7 +13,7 @@ module ForemanDocker
                            :inverse_of => :dns,
                            :class_name => "Container"
 
-    audited :except => [:priority], :associated_with => :container, :allow_mass_assignment => true
+    audited :associated_with => :container, :allow_mass_assignment => true
     validates :name, :uniqueness => { :scope => :reference_id },
                      :format => {
                        :with => Regexp.union(Resolv::IPv4::Regex,
